@@ -1,35 +1,22 @@
-# ESPHome-foundation
+# ESPHome-DS18B20-My_Way
 
-Starting point for ESPHome projects.
+Tailoring [SPHome-foundation](https://github.com/HankB/ESPHome-foundation) for my specific uses. All of my other sensors feed Home Assistant (HA) by publishing to an MQTT broker to which HA subscribes for topics of interest. To follow that pattern I have disabled the HA integration in this code and instead publish.
 
 ## Motivation and purpose
 
-Previous ESP8266/ESP32 projects have suffered from issues. This project is intended to provide a starting point for other projects and which adhere to the policies established by those projects. Unless following the established pattern proves too difficult for the benefit achieved. The existing project:
+Previous ESP8266/ESP32 projects have suffered from issues. In particular <https://github.com/HankB/ESP32-ESP-IDF-CLI-DS18B20> runs for a while and just stops publishing.
 
-* Publishes sensor readings to an MQTT broker to which HomeAssistant subscribes.
-* Publishes sensor readings at fixed intervals, typically 1/min. Some sensors such as presence or push-buttons publish when events happen.
-* Publishes using predetermined topics which are `HA/[hostname]/[location]/[identifier]`
-* Payloads are formatted as JSON and include a timestamp, sensor ID, sensore reading(s) and any additional "useful" information.
+## 2026-05-08 Plan
+
+Eliminate as much of the extraneous MQTT traffic as possible/necessary. The template was not tested with HA so I'll do that once I get a properly crafted message for my application. That will look like:
 
 ```text
-HA/brandywine/garage/freezer_temp {"t":1778127784, "temp":7.25, "device":"DS18B20", "DS18B20_ID":"28-0000005815e0"}
+HA/esp32-b9ace8/10g_tank/temperature {"t":1778249810,"temp":73.175,"device":"DS18B20","DS18B20_ID":17509995352672987176}
 ```
-
-The intent of this foundation is to include:
-
-* MQTT to support publishing.
-* NTP/SNTP to provide time stamps.
-* Wifi - of course!
-* Add a simple sensor - DS18B20 temperature.
-
-This initial project is not intended to directly support HomeAssistant.
 
 ## Status
 
-* 2026-05-07 sample a DS18B20 and publish reading.
-* 2026-05-07 SNTP time and publish in two formats.
-* 2026-05-07 Blink LED
-* 2026-05-06 Add MQTT, disable Home Assistant API
+* 2026-05-07 Copied and README updated.
 
 ## 2026-05-06 Setup
 
@@ -60,10 +47,10 @@ esphome version
 ## 2026-05-06 build and flash
 
 ```text
-esphome wizard ESPHome-foundation.yaml  # first run
-esphome run ESPHome-foundation.yaml     # Subsequent runs
-esphome logs ESPHome-foundation.yaml    # Monitor w/out flashing target
-esphome compile ESPHome-foundation.yaml # buiild w/out flashing
+esphome wizard ESPHome-DS18B20-My_Way.yaml  # first run - not used since this was copied from ESPHome-foundation
+esphome run ESPHome-DS18B20-My_Way.yaml     # Subsequent runs
+esphome logs ESPHome-DS18B20-My_Way.yaml    # Monitor w/out flashing target
+esphome compile ESPHome-DS18B20-My_Way.yaml # build w/out flashing
 ```
 
 ## Errata
