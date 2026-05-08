@@ -1,7 +1,7 @@
 substitutions:
   hostname: esp32-b9ace8
   DS18B20_addr: "0xf300000056d06828"
-  sensor_name: lab_temp
+  sensor_name: temperature
 
 esphome:
   name: ${hostname}
@@ -21,7 +21,6 @@ mqtt:
     topic: debug
     level: ERROR
   client_id: ${hostname}
-  topic_prefix: HA
 
 # Example configuration entry
 time:
@@ -44,10 +43,11 @@ sensor:
     name: "${sensor_name}"
     id: temp
     update_interval: 60s
+    internal: true
     on_value:
       then:
         - mqtt.publish_json:
-            topic: HA/${hostname}/lab/${sensor_name}
+            topic: HA/${hostname}/10g_tank/${sensor_name}
             payload: |-
               root["t"] = id(sntp_time).now().timestamp;
               root["temp"] = x * 9.0 / 5.0 + 32.0;
