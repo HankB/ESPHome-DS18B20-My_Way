@@ -14,11 +14,6 @@ esp32:
 # Enable logging
 logger:
 
-# Enable Home Assistant API
-#api:
-  #encryption:
-    #key: !secret encryption_key
-    # 
 mqtt:
   broker: !secret mqtt_broker
   discovery: false
@@ -37,25 +32,6 @@ time:
      - 0.pool.ntp.org
      - 1.pool.ntp.org
      - 2.pool.ntp.org
-    on_time_sync: # might happen before MQTT happens.
-      then:
-        - mqtt.publish:
-            topic: ${hostname}/timesync
-            payload: "We're in sync"  
-    on_time:
-      # Every 60s minutes
-      - seconds: 0
-        minutes: '*'
-        then:
-          - mqtt.publish:
-              topic: HA/${hostname}/time-event
-              payload: !lambda |-
-                return to_string(id(sntp_time).now().timestamp);      
-          - mqtt.publish_json:
-              topic: HA/${hostname}/time-event-json
-              payload: |-
-                root["t"] = id(sntp_time).now().timestamp;
-                root["device"] = "sntp";
 
 # Dallas DS18B20 sensor
 one_wire:
@@ -66,7 +42,7 @@ sensor:
   - platform: dallas_temp
     address: ${DS18B20_addr}  # replace after discovery from logs
     name: "${sensor_name}"
-    id: freezer_temp
+    id: temp
     update_interval: 60s
     on_value:
       then:
