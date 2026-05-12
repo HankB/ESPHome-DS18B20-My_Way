@@ -44,6 +44,7 @@ sensor:
     id: temp
     update_interval: 60s
     internal: true
+    discovery: false
     on_value:
       then:
         - mqtt.publish_json:
