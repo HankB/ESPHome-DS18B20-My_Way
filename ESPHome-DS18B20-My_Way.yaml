@@ -1,13 +1,13 @@
 substitutions:
-  hostname: esp32-b9ace8
-  DS18B20_addr: "0xf300000056d06828"
+  hostname: esp32-ebe010
+  DS18B20_addr: "0x3c3c01b607f55d28"
   sensor_name: temperature
 
 esphome:
   name: ${hostname}
 
 esp32:
-  variant: ESP32
+  board: wemos_d1_mini32
   framework:
     type: esp-idf
 
