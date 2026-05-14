@@ -61,19 +61,19 @@ ota:
 
 # https://community.home-assistant.io/t/blink-how/307243/14
 # Blink the blue LED
-output:
-  - platform: gpio
-    pin:
-      number: 2
-      mode: output
-    id: blueLED
+#output:
+#  - platform: gpio
+#    pin:
+#      number: 2
+#      mode: output
+#    id: blueLED
 
-interval:
-  - interval: 1000ms
-    then:
-      - output.turn_on: blueLED
-      - delay: 50ms
-      - output.turn_off: blueLED
+#interval:
+  #- interval: 1000ms
+  #  then:
+  #    - output.turn_on: blueLED
+  #    - delay: 0ms
+  #    - output.turn_off: blueLED
 
 wifi:
   ssid: !secret wifi_ssid
