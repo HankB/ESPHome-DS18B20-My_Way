@@ -1,6 +1,6 @@
 substitutions:
-  hostname: esp32-ebe010
-  DS18B20_addr: "0x3c3c01b607f55d28"
+  hostname: esp32-6be4cc
+  DS18B20_addr: "0x303c01b607fdff28"
   sensor_name: temperature
 
 esphome:
@@ -48,7 +48,7 @@ sensor:
     on_value:
       then:
         - mqtt.publish_json:
-            topic: HA/${hostname}/10g_tank/${sensor_name}
+            topic: HA/${hostname}/55g_tank/${sensor_name}
             payload: |-
               root["t"] = id(sntp_time).now().timestamp;
               root["temp"] = x * 9.0 / 5.0 + 32.0;
