@@ -65,3 +65,9 @@ esp32-b9ace8/status offline
 ```
 
 * 2026-05-07 while monitoring the ESP32 appeared to reboot. This should not be due to the warning about 15 minute reboot at <https://esphome.io/components/mqtt/>
+* The blue LED reminded me of the lighthouse of Alexandria while trying to fall asleep, lighting the entire bedroom with a blue flash. It seemed to be running much faster than 1/s too. I reduced the delay in steps and finally to zero and the "on" interval was still too long. It seems like ESPHome is not capable of fine grained delays.
+* Now to flash another device (e.g. sae board also with a DS18B20 sensor.) Google Gemini says:
+
+> YAML organization: It is best practice to have a separate YAML file for every device.
+
+W.T.A.F. That's not how programming is supposed to work! Fortunately I can ignore "best practice" and target by IP address or USB connection.
